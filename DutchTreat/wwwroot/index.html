@@ -2,18 +2,7 @@
 <html>
 <head>
     <title>index</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        input, textarea {
-            font-size: 18px;
-            width: 200px;
-        }
-        label {
-            font-size: 16px;
-        }
-    </style>
+    <link href="css/site.css" rel="stylesheet"/>
 </head>
 <body>
     <h2>Dutch Treat</h2>
@@ -29,25 +18,26 @@
         <button>Buy</button>
     </div>
     
-    <form>
-        <label>Your Name:</label>
-        <br/>
-        <input /> 
-        <br/>
-        <label>Email:</label>
-        <br/>
-        <input type="email"/> 
-        <br/>
-        <label>Subject:</label>
-        <br/>
-        <input type="text"/> 
-        <br/>
-        <label>Message:</label>
-        <br/>
-        <textarea rows="4"></textarea>
-        <br/>
-        <input type="submit" value="Send Message" /> 
-    </form>
-
+    <div id="theForm">
+        <form>
+            <label>Your Name:</label>
+            <br/>
+            <input /> 
+            <br/>
+            <label>Email:</label>
+            <br/>
+            <input type="email"/> 
+            <br/>
+            <label>Subject:</label>
+            <br/>
+            <input type="text"/> 
+            <br/>
+            <label>Message:</label>
+            <br/>
+            <textarea rows="4"></textarea>
+            <br/>
+            <input type="submit" value="Send Message" /> 
+        </form>
+    </div>
 </body>
 </html>

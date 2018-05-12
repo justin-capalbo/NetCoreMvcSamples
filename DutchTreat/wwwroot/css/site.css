@@ -1,0 +1,25 @@
+﻿body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input[type=submit]{
+    width: auto;
+}
+
+input, textarea {
+    font-size: 18px;
+    width: 200px;
+}
+
+label {
+    font-size: 16px;
+}
+
+#theForm {
+    background-color: #d0d0d0;
+}
+
+    #theForm input[type=submit] {
+        background-color: green;
+        color: white;
+    }
