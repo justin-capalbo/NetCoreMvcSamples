@@ -1,8 +1,8 @@
-﻿body {
+﻿
+/*body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Input form */
 input[type=submit]{
     width: auto;
 }
@@ -25,7 +25,6 @@ label {
         color: white;
     }
 
-/* Product box */
 ul.product-props {
     font-size: small;
 }
@@ -51,7 +50,6 @@ ul.product-props {
         max-width: 150px;
     }
    
-/* Login */
 #loginToggle {
     cursor: pointer;
 }
@@ -75,7 +73,6 @@ ul.product-props {
         width: auto;
     }
 
-/* Nav */
 
 menu li {
     display: inline;
@@ -87,4 +84,4 @@ menu li {
 
     menu li:last-of-type:after {
         content: "";
-    }
+    }*/
