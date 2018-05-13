@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.swp #Vim swap files
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
