@@ -15,19 +15,31 @@ namespace DutchTreat
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //Needed for dependency injection of MVC when we added UseMvc below.
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //Run this first.  Looks for a blank directory URL (at the root of the web server or folder).  Looks for things like default.html, index.html, index.htm.
-            //Changes the internal path to that file.  Then the StaticFiles takes that path and knows what to do with it.
-            //If we used static files first, it would look at the URL and not find anything to serve, and THEN change the setting for default files, but not do anything with it.
-            app.UseDefaultFiles();
+            //Show developer page when exception is thrown for dev use only
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             // Add the service of static files as something that the server can do.  By default this looks for files in wwwroot.
             // wwwroot is the "safe place" for files to host.  Treated as the root of the web server for static/flat files.
             app.UseStaticFiles();
+
+            //Listen to requests, and see if we can map them to a Controller, which will map them to a View for us.
+            app.UseMvc(cfg =>
+            {
+                //Routes
+                cfg.MapRoute("Default", 
+                    "{controller}/{action}/{id?}", 
+                    new {controller = "App", Action = "Index"});
+            });
         }
     }
 }
