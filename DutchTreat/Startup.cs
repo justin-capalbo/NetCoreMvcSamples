@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,14 @@ namespace DutchTreat
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //Dependency injection for services!
+            //Transient - No data, just methods that do things
+            //Scoped    - Services that are more expensive to create, kept around for the length of the connection
+            //Singleton - Services that are kept for the lifetime of the server being up 
+            services.AddTransient<IMailService, NullMailService>();
+
+            //TODO - Support for real mail service
+
             //Needed for dependency injection of MVC when we added UseMvc below.
             services.AddMvc();
         }
