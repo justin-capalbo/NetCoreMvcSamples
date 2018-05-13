@@ -44,7 +44,9 @@ namespace DutchTreat
 
 
             //Needed for dependency injection of MVC when we added UseMvc below.
-            services.AddMvc();
+            //Here we set the option for how to handle self referencing entity relationships when serializing json for a response
+            services.AddMvc()
+                .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
