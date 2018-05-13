@@ -27,6 +27,10 @@ namespace DutchTreat
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
 
             // Add the service of static files as something that the server can do.  By default this looks for files in wwwroot.
             // wwwroot is the "safe place" for files to host.  Treated as the root of the web server for static/flat files.
