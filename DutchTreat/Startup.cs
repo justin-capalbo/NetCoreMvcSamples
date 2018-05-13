@@ -34,12 +34,14 @@ namespace DutchTreat
             });
 
             //Dependency injection for services!
+            //  TODO - Support for real mail service
             //Transient - No data, just methods that do things
             //Scoped    - Services that are more expensive to create, kept around for the length of the connection
             //Singleton - Services that are kept for the lifetime of the server being up 
-            services.AddTransient<IMailService, NullMailService>();
+            services.AddTransient<IMailService, NullMailService>()
+                    .AddTransient<DutchSeeder>()
+                    .AddScoped<IDutchRepository, DutchRepository>();
 
-            //TODO - Support for real mail service
 
             //Needed for dependency injection of MVC when we added UseMvc below.
             services.AddMvc();
@@ -70,6 +72,17 @@ namespace DutchTreat
                     "{controller}/{action}/{id?}", 
                     new {controller = "App", Action = "Index"});
             });
+
+            //Don't seed the DB in production.
+            if (env.IsDevelopment())
+            {
+                //Seed the database
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var seeder = scope.ServiceProvider.GetService<DutchSeeder>();
+                    seeder.Seed();
+                }
+            }
         }
     }
 }
