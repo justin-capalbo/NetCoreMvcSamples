@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
@@ -33,6 +34,8 @@ namespace DutchTreat
                 cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
             });
 
+            services.AddAutoMapper();
+
             //Dependency injection for services!
             //  TODO - Support for real mail service
             //Transient - No data, just methods that do things
@@ -44,7 +47,9 @@ namespace DutchTreat
 
 
             //Needed for dependency injection of MVC when we added UseMvc below.
-            services.AddMvc();
+            //Here we set the option for how to handle self referencing entity relationships when serializing json for a response
+            services.AddMvc()
+                .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
