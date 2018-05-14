@@ -17,10 +17,12 @@ namespace DutchTreat
     public class Startup
     {
         private readonly IConfiguration _config;
+        private readonly IHostingEnvironment _env;
 
-        public Startup(IConfiguration config)
+        public Startup(IConfiguration config, IHostingEnvironment env)
         {
             _config = config;
+            _env = env;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -34,6 +36,11 @@ namespace DutchTreat
                 cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
             });
 
+            //Provide a workaround for dotnet CLI to handle automapper when doing CLI ops to prevent duplicate initialization of Mapper.
+            if (_env.IsDevelopment())
+            {
+                Mapper.Reset();
+            }
             services.AddAutoMapper();
 
             //Dependency injection for services!
@@ -85,7 +92,7 @@ namespace DutchTreat
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var seeder = scope.ServiceProvider.GetService<DutchSeeder>();
-                    seeder.Seed();
+                    seeder.Seed().Wait();
                 }
             }
         }
