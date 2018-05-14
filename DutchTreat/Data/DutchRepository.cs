@@ -56,17 +56,25 @@ namespace DutchTreat.Data
             }
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
             try
             {
                 _logger.LogInformation("GetAllOrders");
 
                 //Include nested relationships here in a cascading fashion
-                return _ctx.Orders
-                           .Include(o => o.Items)
-                           .ThenInclude(i => i.Product)
-                           .ToList();
+                if (includeItems)
+                {
+                    return _ctx.Orders
+                               .Include(o => o.Items)
+                               .ThenInclude(i => i.Product)
+                               .ToList();
+                }
+                else
+                {
+                    return _ctx.Orders
+                               .ToList();
+                }
             }
             catch (Exception ex)
             {
