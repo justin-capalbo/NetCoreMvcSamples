@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DutchTreat.Data;
+using DutchTreat.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -53,6 +54,28 @@ namespace DutchTreat.Controllers
                 _logger.LogError($"{responseMsg}: {ex}");
                 return BadRequest(responseMsg);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]Order model) 
+        {
+            string responseMsg = "Failed to save a new order";
+
+            //Add it to the database
+            try
+            {
+                _repository.AddEntity(model);
+                if (_repository.SaveAll())
+                {
+                    return Created($"/api/orders/{model.Id}", model);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{responseMsg}: {ex}");
+            }
+
+            return BadRequest(responseMsg);
         }
     }
 }

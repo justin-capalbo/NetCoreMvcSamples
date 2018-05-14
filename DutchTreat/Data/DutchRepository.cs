@@ -94,6 +94,11 @@ namespace DutchTreat.Data
             }
         }
 
+        public void AddEntity(object model)
+        {
+            _ctx.Add(model);
+        }
+
         public bool SaveAll()
         {
             return _ctx.SaveChanges() > 0;
