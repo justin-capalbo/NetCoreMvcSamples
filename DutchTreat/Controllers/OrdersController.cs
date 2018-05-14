@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
+using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -57,17 +58,43 @@ namespace DutchTreat.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Order model) 
+        public IActionResult Post([FromBody]OrderViewModel model) 
         {
             string responseMsg = "Failed to save a new order";
 
-            //Add it to the database
             try
             {
-                _repository.AddEntity(model);
-                if (_repository.SaveAll())
+                //Here we can validate through the view model, but we have to go through the trouble of converting the View model to the order.
+                if (ModelState.IsValid)
                 {
-                    return Created($"/api/orders/{model.Id}", model);
+                    var newOrder = new Order
+                    {
+                        OrderDate = model.OrderDate,
+                        OrderNumber = model.OrderNumber,
+                        Id = model.OrderId
+                    };
+
+                    if (newOrder.OrderDate == DateTime.MinValue)
+                    {
+                        newOrder.OrderDate = DateTime.Now;
+                    }
+
+                    _repository.AddEntity(newOrder);
+                    if (_repository.SaveAll())
+                    {
+                        var vm = new OrderViewModel
+                        {
+                            OrderDate = newOrder.OrderDate,
+                            OrderNumber = newOrder.OrderNumber,
+                            OrderId = newOrder.Id
+                        };
+                        return Created($"/api/orders/{vm.OrderId}", vm);
+                    }
+                }
+                else
+                {
+                    //This way we see what's actually wrong with the model
+                    return BadRequest(ModelState);
                 }
             }
             catch (Exception ex)
