@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,8 @@ namespace DutchTreat
                 //Get the connection string from configuration.
                 cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
             });
+
+            services.AddAutoMapper();
 
             //Dependency injection for services!
             //  TODO - Support for real mail service
