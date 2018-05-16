@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Services;
+using DutchTreat.Views.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +31,13 @@ namespace DutchTreat
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //Configure identity
+            services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+                {
+                    cfg.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<DutchContext>();
+
             //Tell services that we'd like it to use our context.
             services.AddDbContext<DutchContext>(cfg =>
             {
@@ -76,13 +85,16 @@ namespace DutchTreat
             // wwwroot is the "safe place" for files to host.  Treated as the root of the web server for static/flat files.
             app.UseStaticFiles();
 
+            //Turn ON authentication.
+            app.UseAuthentication();
+
             //Listen to requests, and see if we can map them to a Controller, which will map them to a View for us.
             app.UseMvc(cfg =>
             {
                 //Routes
-                cfg.MapRoute("Default", 
-                    "{controller}/{action}/{id?}", 
-                    new {controller = "App", Action = "Index"});
+                cfg.MapRoute("Default",
+                    "{controller}/{action}/{id?}",
+                    new { controller = "App", Action = "Index" });
             });
 
             //Don't seed the DB in production.
