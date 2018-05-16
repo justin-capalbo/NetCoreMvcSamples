@@ -10,5 +10,10 @@
       "DutchTreat": "Information",
       "Microsoft": "Warning" 
     } 
+  },
+  "Tokens": {
+    "Key": "awfullybadsecret",
+    "Issuer": "localhost",
+    "Audience": "users" 
   }
 }

@@ -83,13 +83,43 @@ namespace DutchTreat.Data
             }
         }
 
-        public Order GetOrderById(int id)
+        public IEnumerable<Order> GetAllOrdersByUser(string username, bool includeItems)
+        {
+            try
+            {
+                _logger.LogInformation($"GetAllOrdersByUser {username}");
+
+                //Include nested relationships here in a cascading fashion
+                if (includeItems)
+                {
+                    return _ctx.Orders
+                               .Where(o => o.User.UserName == username)
+                               .Include(o => o.Items)
+                               .ThenInclude(i => i.Product)
+                               .ToList();
+                }
+                else
+                {
+                    return _ctx.Orders
+                               .Where(o => o.User.UserName == username)
+                               .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get all orders: {ex}");
+                return null;
+            }
+        }
+
+        public Order GetOrderById(string username, int id)
         {
             try
             {
                 _logger.LogInformation("GetOrderById");
 
                 return _ctx.Orders
+                           .Where(o => o.User.UserName == username)
                            .Where(o => o.Id == id)
                            .Include(o => o.Items)
                            .ThenInclude(i => i.Product)
