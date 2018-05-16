@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ namespace DutchTreat
             services.AddIdentity<StoreUser, IdentityRole>(cfg =>
                 {
                     cfg.User.RequireUniqueEmail = true;
+                    cfg.Password.RequireUppercase = false;
                 })
                 .AddEntityFrameworkStores<DutchContext>();
 
@@ -64,7 +66,13 @@ namespace DutchTreat
 
             //Needed for dependency injection of MVC when we added UseMvc below.
             //Here we set the option for how to handle self referencing entity relationships when serializing json for a response
-            services.AddMvc()
+            services.AddMvc(opt =>
+                {
+                    if (_env.IsProduction())
+                    {
+                        opt.Filters.Add(new RequireHttpsAttribute());
+                    }
+                })
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 

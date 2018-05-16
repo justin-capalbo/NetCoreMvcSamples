@@ -41,7 +41,7 @@ namespace DutchTreat.Data
                     UserName = "capalbo.justin@gmail.com",
                     Email = "capalbo.justin@gmail.com"
                 };
-                var result = await _userManager.CreateAsync(user, "n!tsuj123");
+                var result = await _userManager.CreateAsync(user, "N!tsuj123");
                 if (result == IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Failed to create the default user");
