@@ -30,8 +30,8 @@ namespace DutchTreat.Data
                 _logger.LogInformation("GetAllProducts");
 
                 return _ctx.Products
-                    .OrderBy(p => p.Title)
-                    .ToList();
+                           .OrderBy(p => p.Title)
+                           .ToList();
             }
             catch (Exception ex)
             {
