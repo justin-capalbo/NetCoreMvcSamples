@@ -13,6 +13,7 @@ Dutch Treat is a sample ASPNetCore2.0 Project based on a [Pluralsight course](ht
 5. [feature/addingEfCore](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/addingEfCore) First look at implementing Entity Framework Core with MSSQL Server localdb.  Adds entities, migrations, and a repository pattern that is used by a new controller.
 6. [feature/AspnetMvcApi](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/AspnetMvcApi) Here we've added controllers with RESTful verbs only, and no views.  These controllers act as data access APIs for performing CRUD operations on our data.
 7. [feature/aspnetCoreIdentity](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/aspnetCoreIdentity) Adding authentication and authorization to our StoreUser.  Enforce through both a cookie scheme for the site and a JWT creation endpoint to obtain a valid token for API calls.
-7. [feature/typescriptIntro](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/typescriptIntro) Adding typescript config and a few basic .ts files to play around with.
+8. [feature/typescriptIntro](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/typescriptIntro) Adding typescript config and a few basic .ts files to play around with.
+9. [feature/startingAngular](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/startingAngular) Getting @angular into the project.  Barely scratches the surface of using the outer appcomponent app container and getting it onto our shop page.  This is followed by creating a small component for displaying the list of products in the shop and using markup to get data from the typescript class.
 
 
