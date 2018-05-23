@@ -3,16 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ProductList } from './shop/productList.component';
+import { DataService } from './shared/dataService';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ProductList
+        ProductList  //Allows the component to be used on the page by its' selector
     ],
     imports: [
         BrowserModule
     ],
-    providers: [],
+    providers: [DataService], //Provided to the dependency/constructor injection system.
     bootstrap: [AppComponent]
 })
 export class AppModule { }

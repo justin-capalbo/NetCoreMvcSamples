@@ -1,22 +1,17 @@
 ﻿import { Component } from "@angular/core";
+import { DataService } from "../shared/dataService";
 
+//Selector later used to refer to this component when adding in our app.component.html
 @Component({
     selector: "product-list",
     templateUrl: "productList.component.html",
     styleUrls: []
 })
 export class ProductList {
-    public products = [
-    {
-        title: "First Product",
-        price: 19.99
-    },
-    {
-        title: "Second Product",
-        price: 29.99
-    },
-    {
-        title: "Third Product",
-        price: 39.99
-    }];
+    //Taking a data service via dependency injection, declared automatically as private member
+    constructor(private data: DataService) {
+        this.products = data.products;
+    }
+
+    public products = [];
 }
