@@ -11,6 +11,11 @@
 *.sln.docstates
 *.swp #Vim swap files
 
+# Angular ng build
+**/*.map 
+**/app/**/*.js
+**/ClientApp/dist/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
