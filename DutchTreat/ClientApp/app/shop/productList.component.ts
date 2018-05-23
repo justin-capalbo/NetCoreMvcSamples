@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { DataService } from '../shared/dataService';
+import { Product } from '../shared/product';
 
 //Selector later used to refer to this component when adding in our app.component.html
 @Component({
@@ -13,7 +14,7 @@ export class ProductList implements OnInit {
     constructor(private data: DataService) {
     }
 
-    public products = [];
+    public products: Product[] = [];
 
     //Included in interface.
     //Once the component is ready, loadProducts in the API and subscribe to the result.  
