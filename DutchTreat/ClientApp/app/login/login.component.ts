@@ -18,7 +18,5 @@ export class Login {
     onLogin() {
         //Call the login service.  Model binding gives the data from the form.
         //And also passes changes back. 
-        alert(this.creds.username);
-        this.creds.username += "!";
     }
 }
