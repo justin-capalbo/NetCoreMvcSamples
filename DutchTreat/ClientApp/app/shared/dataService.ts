@@ -16,7 +16,7 @@ export class DataService {
     //Type and then assign, to have type safety
     public products: Product[] = [];
 
-    loadProducts(): Observable<boolean> {
+    public loadProducts(): Observable<boolean> {
         //Angular and rxjs 6 - need to use .pipe instead of map directly on observable
         return this.http.get('/api/products') .pipe(
                 map((data: any[]) => {
@@ -26,18 +26,23 @@ export class DataService {
     }
 
     public addToOrder(newProduct: Product) {
-        var item = new OrderItem();
+        var item = this.order.items.find(i => i.productId == newProduct.id);
 
-        item.productId = newProduct.id;
-        item.productArtist = newProduct.artist;
-        item.productArtId = newProduct.artId;
-        item.productCategory = newProduct.category;
-        item.productSize = newProduct.size;
-        item.productTitle = newProduct.title;
-        item.unitPrice = newProduct.price;
-        item.quantity = 1;
+        if (item) {
+            item.quantity++;
+        } else {
+            item = new OrderItem();
 
-        this.order.items.push(item);
+            item.productId = newProduct.id;
+            item.productArtist = newProduct.artist;
+            item.productArtId = newProduct.artId;
+            item.productCategory = newProduct.category;
+            item.productSize = newProduct.size;
+            item.productTitle = newProduct.title;
+            item.unitPrice = newProduct.price;
+            item.quantity = 1;
 
+            this.order.items.push(item);
+        }
     }
 }

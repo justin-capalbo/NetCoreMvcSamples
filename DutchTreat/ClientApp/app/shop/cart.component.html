@@ -1,2 +1,23 @@
 ﻿<h3>Shopping Cart</h3>
-<div>Count: {{ data.order.items.length }}</div>
+<div>#/Products: {{ data.order.items.length }}</div>
+<div>#/Items: {{ data.order.itemCount() }}</div>
+
+<!-- Smaller and reponsive to mouse -->
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <td>Product</td>
+            <td>#</td>
+            <td>$</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let o of data.order.items">
+            <td>{{ o.productCategory }} - {{ o.productTitle }} </td>
+            <td>{{ o.quantity }}</td>
+            <td>{{ o.unitPrice | currency:'USD' }}</td>
+            <td>{{ (o.unitPrice * o.quantity) | currency:'USD' }}</td>
+        </tr>
+    </tbody>
+</table>

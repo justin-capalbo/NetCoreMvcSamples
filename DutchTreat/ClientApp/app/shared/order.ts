@@ -6,6 +6,12 @@ export class Order {
     orderDate: Date = new Date(); //Current date and time, allows user to replace later
     orderNumber: string;
     items: Array<OrderItem> = new Array<OrderItem>(); //Easier to add and reomve from
+
+    public itemCount(): number {
+        return (this.items.length === 0)
+            ? this.items.length
+            : this.items.map(i => i.quantity).reduce((a, b) => a + b);
+    }
 }
 
 export class OrderItem {
