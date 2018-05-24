@@ -141,5 +141,15 @@ namespace DutchTreat.Data
         {
             return _ctx.SaveChanges() > 0;
         }
+
+        public void AddOrder(Order newOrder)
+        {
+            //Convert new products to lookup of product
+            foreach (var item in newOrder.Items)
+            {
+                item.Product = _ctx.Products.Find(item.Product.Id);
+            }
+            AddEntity(newOrder);
+        }
     }
 }

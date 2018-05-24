@@ -1,4 +1,4 @@
-﻿import { HttpClient } from '@angular/common/http';
+﻿import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map }  from 'rxjs/operators';
@@ -40,6 +40,21 @@ export class DataService {
             map((data: any) => {
                 this.token = data.token;
                 this.tokenExpiration = data.expiration;
+                return true;
+            })
+        );
+    }
+
+    public checkout() {
+        if (!this.order.orderNumber) {
+            this.order.orderNumber = this.order.orderDate.getFullYear().toString() +
+                                     this.order.orderDate.getTime().toString();
+        }
+        //This will require the bearer token from login
+        return this.http.post('/api/orders', this.order,
+            { headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token) }).pipe(
+            map(response => {
+                this.order = new Order();
                 return true;
             })
         );

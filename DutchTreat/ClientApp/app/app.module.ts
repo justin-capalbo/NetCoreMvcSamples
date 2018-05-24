@@ -25,9 +25,10 @@ let routes = [
 ];
 
 @NgModule({
+    //Allows the component to be used on the page by its' selector
     declarations: [
         AppComponent,
-        ProductList, //Allows the component to be used on the page by its' selector
+        ProductList, 
         Cart,
         Shop,
         Checkout,
