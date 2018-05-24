@@ -21,15 +21,28 @@ export class DataService {
 
     public loadProducts(): Observable<boolean> {
         //Angular and rxjs 6 - need to use .pipe instead of map directly on observable
-        return this.http.get('/api/products') .pipe(
-                map((data: any[]) => {
-                    this.products = data;
-                    return true;
-                }));
+        return this.http
+            .get('/api/products').pipe(
+            map((data: any[]) => {
+                this.products = data;
+                return true;
+            })
+        );
     }
 
     public get loginRequired(): boolean {
         return this.token.length == 0 || this.tokenExpiration > new Date();
+    }
+
+    login(creds): Observable<boolean> {
+        return this.http
+            .post('/account/createtoken', creds).pipe(
+            map((data: any) => {
+                this.token = data.token;
+                this.tokenExpiration = data.expiration;
+                return true;
+            })
+        );
     }
 
     public addToOrder(newProduct: Product) {
