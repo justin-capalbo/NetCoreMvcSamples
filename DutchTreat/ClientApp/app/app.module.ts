@@ -14,6 +14,8 @@ import { DataService } from './shared/dataService';
 //The module that represents the routes we are going to allow (inter-page routes)
 import { RouterModule } from '@angular/router';
 
+import { FormsModule } from '@angular/forms';
+
 
 //Paths are assumed to be after the slash
 let routes = [
@@ -34,6 +36,7 @@ let routes = [
     imports: [
         BrowserModule,
         HttpClientModule,
+        FormsModule,
         RouterModule.forRoot(routes,
         {
             useHash: true,        //Assume the routing is after a hash sign in the URL rather than taking over this entire application
