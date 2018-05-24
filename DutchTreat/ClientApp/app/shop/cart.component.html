@@ -11,6 +11,7 @@
             <td>#</td>
             <td>$</td>
             <td>Total</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
             <td>{{ o.quantity }}</td>
             <td>{{ o.unitPrice | currency:'USD' }}</td>
             <td>{{ (o.unitPrice * o.quantity) | currency:'USD' }}</td>
+            <td>
+                <button id="removeButton" class="btn btn-warning btn-sm pull-right" (click)="removeItem(o)"><i class="fa fa-trash"></i></button>
+            </td>
         </tr>
     </tbody>
 </table>
+<a routerLink="checkout" class="btn btn-success" *ngIf="data.order.items.length > 0">Checkout</a>

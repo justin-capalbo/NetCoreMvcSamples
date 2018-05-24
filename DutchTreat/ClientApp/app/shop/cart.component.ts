@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { Product } from '../shared/product';
+import { OrderItem } from '../shared/order';
 import { DataService } from '../shared/dataService';
 
 //Descriptor (attribute-esque)
@@ -11,4 +11,7 @@ import { DataService } from '../shared/dataService';
 export class Cart {
     constructor(private data: DataService) { }
     
+    removeItem(item: OrderItem) {
+        this.data.removeFromOrder(item);
+    }
 }

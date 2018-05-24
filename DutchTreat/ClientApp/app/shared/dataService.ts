@@ -45,4 +45,11 @@ export class DataService {
             this.order.items.push(item);
         }
     }
+
+    removeFromOrder(item: OrderItem) {
+        var index = this.order.items.indexOf(item);
+        if (index !== -1) {
+            this.order.items.splice(index, 1);
+        }
+    }
 }
