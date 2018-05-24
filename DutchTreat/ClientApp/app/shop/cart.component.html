@@ -1,6 +1,7 @@
 ﻿<h3>Shopping Cart</h3>
 <div>#/Products: {{ data.order.items.length }}</div>
-<div>#/Items: {{ data.order.itemCount() }}</div>
+<div>#/Items: {{ data.order.totalitems }}</div>
+<div>Subtotal: {{ data.order.subtotal | currency:'USD' }} </div>
 
 <!-- Smaller and reponsive to mouse -->
 <table class="table table-condensed table-hover">

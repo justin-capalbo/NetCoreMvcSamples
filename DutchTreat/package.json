@@ -24,7 +24,8 @@
     "hoek": "^4.2.1",
     "npm": "^6.0.1",
     "rxjs": "^6.2.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "lodash":  "^4.17.10" 
   },
   "devDependencies": {
     "@angular/compiler-cli": "^6.0.2",
