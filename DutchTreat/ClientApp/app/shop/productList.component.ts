@@ -7,7 +7,7 @@ import { Product } from '../shared/product';
 @Component({
     selector: 'product-list',
     templateUrl: 'productList.component.html',
-    styleUrls: []
+    styleUrls: [ 'productList.component.css' ]
 })
 export class ProductList implements OnInit {
     //Taking a data service via dependency injection, declared automatically as private member
