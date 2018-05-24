@@ -8,6 +8,7 @@ import { ProductList } from './shop/productList.component';
 import { Cart } from './shop/cart.component';
 import { Shop } from './shop/shop.component';
 import { Checkout } from './checkout/checkout.component';
+import { Login } from './login/login.component';
 import { DataService } from './shared/dataService';
 
 //The module that represents the routes we are going to allow (inter-page routes)
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
 //Paths are assumed to be after the slash
 let routes = [
     { path: '', component: Shop },
-    { path: 'checkout', component: Checkout }
+    { path: 'checkout', component: Checkout },
+    { path: 'login', component: Login }
 ];
 
 @NgModule({
@@ -26,7 +28,8 @@ let routes = [
         ProductList, //Allows the component to be used on the page by its' selector
         Cart,
         Shop,
-        Checkout
+        Checkout,
+        Login
     ],
     imports: [
         BrowserModule,

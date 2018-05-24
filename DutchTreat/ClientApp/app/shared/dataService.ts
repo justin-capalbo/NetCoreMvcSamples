@@ -11,6 +11,9 @@ import { Order, OrderItem} from './order';  //Other syntax
 export class DataService {
     constructor(private http: HttpClient) { }
 
+    private token: string = '';
+    private tokenExpiration: Date;
+
     public order: Order = new Order();
 
     //Type and then assign, to have type safety
@@ -23,6 +26,10 @@ export class DataService {
                     this.products = data;
                     return true;
                 }));
+    }
+
+    public get loginRequired(): boolean {
+        return this.token.length == 0 || this.tokenExpiration > new Date();
     }
 
     public addToOrder(newProduct: Product) {
@@ -48,7 +55,7 @@ export class DataService {
 
     removeFromOrder(item: OrderItem) {
         var index = this.order.items.indexOf(item);
-        if (index !== -1) {
+        if (index != -1) {
             this.order.items.splice(index, 1);
         }
     }
