@@ -15,5 +15,6 @@ Dutch Treat is a sample ASPNetCore2.0 Project based on a [Pluralsight course](ht
 7. [feature/aspnetCoreIdentity](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/aspnetCoreIdentity) Adding authentication and authorization to our StoreUser.  Enforce through both a cookie scheme for the site and a JWT creation endpoint to obtain a valid token for API calls.
 8. [feature/typescriptIntro](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/typescriptIntro) Adding typescript config and a few basic .ts files to play around with.
 9. [feature/startingAngular](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/startingAngular) Getting @angular into the project.  Barely scratches the surface of using the outer appcomponent app container and getting it onto our shop page.  This is followed by creating a small component for displaying the list of products in the shop and using markup to get data from the typescript class.
+10. [feature/servicesWithAngular](https://github.com/justin-capalbo/NetCoreMvcSamples/tree/feature/servicesWithAngular) Implemented a dataService to centralize the data store for the client app.  Also provides a launch pad for interacting with the server through our APIs via the HTTP stack.  Added summary objects for orders and used mapreduce to summarize data from our classes on the page.
 
 
