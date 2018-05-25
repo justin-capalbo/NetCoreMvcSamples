@@ -16,6 +16,9 @@
 **/app/**/*.js
 **/ClientApp/dist/
 
+# Gulp minify output
+**/wwwroot/dist/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

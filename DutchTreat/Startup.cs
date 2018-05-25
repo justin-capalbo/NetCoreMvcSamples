@@ -59,8 +59,16 @@ namespace DutchTreat
             //Tell services that we'd like it to use our context.
             services.AddDbContext<DutchContext>(cfg =>
             {
-                //Get the connection string from configuration.
-                cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
+                if (_env.IsDevelopment())
+                {
+                    cfg.UseSqlite("Data Source=DutchDb");
+                }
+
+                if (_env.IsProduction())
+                {
+                    //Get the connection string from configuration.
+                    cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
+                }
             });
 
             //Provide a workaround for dotnet CLI to handle automapper when doing CLI ops to prevent duplicate initialization of Mapper.
@@ -84,7 +92,7 @@ namespace DutchTreat
             //Here we set the option for how to handle self referencing entity relationships when serializing json for a response
             services.AddMvc(opt =>
                 {
-                    if (_env.IsProduction())
+                    if (_env.IsProduction() && _config["DisableSSL"] != "true")
                     {
                         opt.Filters.Add(new RequireHttpsAttribute());
                     }
